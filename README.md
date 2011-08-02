@@ -76,5 +76,4 @@ And that's all.
 
 ## TODO
 
- * Unit tests !
  * Why not make it useable in production (cache implementation and asset combining)

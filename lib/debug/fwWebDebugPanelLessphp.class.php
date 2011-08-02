@@ -94,4 +94,9 @@ HTML
     $this->infos[] = $event->getParameters();
   }
 
+  public function getInfos()
+  {
+    return $this->infos;
+  }
+
 }

@@ -7,10 +7,9 @@
  
 class fwLessphpPluginConfiguration extends sfPluginConfiguration
 {
-  /**
-   * @var fwLessphp
-   */
-  protected $fwLessphp;
+  protected
+    $fwLessphp,
+    $webDebug;
 
   public function configure()
   {
@@ -47,7 +46,41 @@ class fwLessphpPluginConfiguration extends sfPluginConfiguration
 
   public function listenToDebugWebLoadPanelsEvent(sfEvent $event)
   {
-    $event->getSubject()->setPanel('lessphp', new fwWebDebugPanelLessphp($event->getSubject()));
+    $this->webDebug = new fwWebDebugPanelLessphp($event->getSubject());
+    $event->getSubject()->setPanel('lessphp', $this->webDebug);
+  }
+
+  /**
+   * @param \fwLessphp $fwLessphp
+   */
+  public function setFwLessphp($fwLessphp)
+  {
+    $this->fwLessphp = $fwLessphp;
+  }
+
+  /**
+   * @return \fwLessphp
+   */
+  public function getFwLessphp()
+  {
+    return $this->fwLessphp;
+  }
+
+  /**
+   * @param fwWebDebugPanelLessphp $webDebug
+   * @return void
+   */
+  public function setWebDebug(fwWebDebugPanelLessphp $webDebug)
+  {
+    $this->webDebug = $webDebug;
+  }
+
+  /**
+   * @return fwWebDebugPanelLessphp
+   */
+  public function getWebDebug()
+  {
+    return $this->webDebug;
   }
 
 }

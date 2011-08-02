@@ -6,10 +6,10 @@
  * 
  * @return void
  */
-function fw_include_stylesheets()
+function fw_include_stylesheets(sfWebResponse $response = null)
 {
   echo sfConfig::get('fw_lessphp_enabled', false) ?
-         fw_get_stylesheets() :
+         fw_get_stylesheets($response) :
          call_user_func(sfConfig::get('fw_lessphp_substitute_helper', 'get_stylesheets'));
 }
 
@@ -19,14 +19,24 @@ function fw_include_stylesheets()
  *
  * @return string
  */
-function fw_get_stylesheets()
+function fw_get_stylesheets(sfWebResponse $response = null)
 {
-  $response = sfContext::getInstance()->getResponse();
-
   sfConfig::set('symfony.asset.stylesheets_included', true);
 
   $html = '';
-  foreach ($response->getLesscssParsedStylesheets() as $file => $options)
+
+  $parsedStylesheets = null;
+  if(is_null($response))
+  {
+    $response = sfContext::getInstance()->getResponse();
+    $parsedStylesheets = $response->getLesscssParsedStylesheets();
+  }
+  else
+  {
+    $parsedStylesheets = $response->getLesscssParsedStylesheets(sfWebResponse::ALL, false);
+  }
+
+  foreach ($parsedStylesheets as $file => $options)
   {
     $html .= stylesheet_tag($file, $options);
   }
