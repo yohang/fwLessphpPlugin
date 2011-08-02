@@ -3,7 +3,7 @@
 ## Warning
 
 This plugin is not designed to be used in production environment ! Its aim is to complete raw lessphp renderer like
-the swCombinePlugin Lessphp renderer.
+the swCombinePlugin Lessphp driver.
 
 ## Overview
 
@@ -64,7 +64,7 @@ All the plugin configuration is based on the fw_lessphp.yml file. Put it in you 
 
 ### Step 4 - Final
 
-Use the fw_include_stylesheets() helper in your layout.yml
+Use the fw_include_stylesheets() helper in your layout.php
 
     <head>
       ...
