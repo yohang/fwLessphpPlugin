@@ -1,0 +1,4 @@
+config/fw_lessphp.yml:
+  class:    sfDefineEnvironmentConfigHandler
+  param:
+    prefix: fw_lessphp_
