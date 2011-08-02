@@ -1,6 +1,6 @@
 <?php
 /**
- * The fwWebDebugPanelLessphp Class do some things...
+ * Web debug toolbar less php class
  *
  * @author Yohan Giarelli <yohan@giarelli.org>
  */
@@ -53,6 +53,12 @@ class fwWebDebugPanelLessphp extends sfWebDebugPanel
     return $content;
   }
 
+  /**
+   * Returns the HTML code for an element
+   *
+   * @param $parameters
+   * @return string
+   */
   protected function renderElement($parameters)
   {
     $time = round($parameters['time'] * 1000);
@@ -77,6 +83,12 @@ HTML
     );
   }
 
+  /**
+   * Listen to the render_file event, to get less files infos
+   *
+   * @param sfEvent $event
+   * @return void
+   */
   public function listenToFwLessphpRenderFileEvent(sfEvent $event)
   {
     $this->infos[] = $event->getParameters();

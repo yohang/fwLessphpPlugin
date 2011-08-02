@@ -1,6 +1,10 @@
 <?php
 /**
- * The fwLessphp Class do some things...
+ * The fwLessphp Manage rendering of less files
+ *
+ * Warning : This class (and this plugin) is NOT DESIGNED to be used in PRODUCTION !
+ *
+ * You'd better to use it in dev mode, and to use the swCombinePlugin less driver in production
  *
  * @author Yohan Giarelli <yohan@giarelli.org>
  */
