@@ -20,7 +20,10 @@ class fwLessphpPluginConfiguration extends sfPluginConfiguration
 
   public function listenToContextLoadFactoriesEvent(sfEvent $event)
   {
-    include $event->getSubject()->getConfigCache()->checkConfig('config/fw_lessphp.yml');
+    if ($file = $event->getSubject()->getConfigCache()->checkConfig('config/fw_lessphp.yml', true))
+    {
+      include $file;
+    }
     if (sfConfig::get('fw_lessphp_enabled', false))
     {
       $this->fwLessphp = new fwLessphp($event->getSubject()->getResponse(), $this->dispatcher);
