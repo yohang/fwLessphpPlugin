@@ -45,10 +45,10 @@ class fwLessphp
         // compile it
         $destinationFile = preg_replace($this->sourcePattern, $this->destinationPattern, $stylesheet);
         $lessCompiler = new lessc;
-        $lessCompiler->importDir = sfConfig::get('sf_root_dir').sfConfig::get('fw_lessphp_source_base_path', '/data/less');
-
+        $lessCompiler->importDir = dirname($this->getSourcePath($stylesheet));
         // Write it if necessary
-        if ($write) {
+        if ($write)
+        {
           file_put_contents(
             $this->getDestinationPath($destinationFile, true),
             $lessCompiler->parse(
