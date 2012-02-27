@@ -65,7 +65,9 @@ class fwLessphp
           'less_file'  => sfConfig::get('fw_lessphp_source_base_path', '/data/less') . '/' . $stylesheet,
           'stylesheet' => $this->getDestinationPath($destinationFile),
           'time'       => microtime() - $time,
-          'size'       => filesize($this->getDestinationPath($destinationFile, true, $write))
+          'size'       => is_file($this->getDestinationPath($destinationFile, true, $write)) ?
+                            filesize($this->getDestinationPath($destinationFile, true, $write)) :
+                            0
         ));
         $this->dispatcher->notify($event);
       }
