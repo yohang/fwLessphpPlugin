@@ -48,7 +48,8 @@ class fwLessphp
         $lessCompiler->importDir = dirname($this->getSourcePath($stylesheet));
 
         // Write it if necessary
-        if ($write) {
+        if ($write)
+        {
           file_put_contents(
             $this->getDestinationPath($destinationFile, true),
             $lessCompiler->parse(

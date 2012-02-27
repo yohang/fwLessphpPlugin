@@ -3,6 +3,16 @@
 require_once __DIR__ . '/../../bootstrap/unit.php';
 require_once __DIR__ . '/../../../lib/fwLessphp.class.php';
 require_once __DIR__ . '/../../../lib/helper/fwLessphpHelper.php';
+
+$t = new lime_test();
+
+if (!is_file(sfConfig::get('sf_symfony_lib_dir').'/../test/unit/sfContextMock.class.php'))
+{
+  // This test suite needs the symfony test folder, we skip it if we don't have.
+  $t->skip('Don\'t have sfContextMock');
+  exit(0);
+}
+
 require_once sfConfig::get('sf_symfony_lib_dir').'/../test/unit/sfContextMock.class.php';
 require_once sfConfig::get('sf_symfony_lib_dir').'/helper/TagHelper.php';
 require_once sfConfig::get('sf_symfony_lib_dir').'/helper/UrlHelper.php';
@@ -38,7 +48,6 @@ class myController
 
 $context = sfContext::getInstance(array('request' => 'myRequest', 'response' => 'sfWebResponse', 'controller' => 'myController'));
 
-$t = new lime_test();
 
 $response->addStylesheet('match-to.less');
 $response->addStylesheet('match-to.less-to.less');
