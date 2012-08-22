@@ -8,8 +8,8 @@
  *
  * @author Yohan Giarelli <yohan@giarelli.org>
  */
- 
-class fwLessphp 
+
+class fwLessphp
 {
   protected
     $sourcePattern,
@@ -62,13 +62,12 @@ class fwLessphp
         $stylesheets[$this->getDestinationPath($destinationFile)] = $options;
 
         // Raise an event with the compiling infos (used for web debuf toolbar)
+        $filename = $this->getDestinationPath($destinationFile, true, $write);
         $event = new sfEvent($this, 'fw_lessphp.render_file', array(
           'less_file'  => sfConfig::get('fw_lessphp_source_base_path', '/data/less') . '/' . $stylesheet,
           'stylesheet' => $this->getDestinationPath($destinationFile),
           'time'       => microtime() - $time,
-          'size'       => is_file($this->getDestinationPath($destinationFile, true, $write)) ?
-                            filesize($this->getDestinationPath($destinationFile, true, $write)) :
-                            0
+          'size'       => is_file($filename) ? filesize($filename) : 0
         ));
         $this->dispatcher->notify($event);
       }
@@ -96,7 +95,7 @@ class fwLessphp
 
   /**
    * Returns the destination path of the stylesheet, create directory if necessary
-   * 
+   *
    * @param $stylesheet
    * @param bool $absolute
    * @return string
